@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block container %}
 <div class="row">
@@ -31,10 +31,10 @@ padding: 10px;max-width: 150px;margin-right: 100px;" />
         <p>
         <button type="button" class="btn btn-default btn-lg mute" onclick="mute();">
             <span class="glyphicon glyphicon-volume-off">Mute</span>
-        </button>                      
+        </button>
         <button type="button" class="btn btn-default btn-lg unmute" onclick="unmute();">
             <span class="glyphicon glyphicon-volume-up">Unmute</span>
-        </button>                      
+        </button>
         <a class="btn btn-hg btn-info" id="make_call" href="#" onclick="call();">Click to join your conference</a>
         <div class="media-permission">No</div>
         <div class="col-sm-8 col-sm-offset-2"><div id="note"><p>Note: this room is only available for 24 hours upon creation for security reasons. You can create a new room <a href="/">here</a>.</p></div></div>
@@ -105,7 +105,7 @@ function make_call() {
     $('#make_call').toggleClass("btn-danger");
     $('#make_call').text('Click to leave your conference');
     $('.mute').show();
-    $('#status-msg').text('You are now in the conference. Share this URL to invite others to join.');    
+    $('#status-msg').text('You are now in the conference. Share this URL to invite others to join.');
     $('#note').show();
 }
 
@@ -120,10 +120,13 @@ function end_call() {
 
 function call() {
     if ($('#make_call').text() == "Click to join your conference") {
+      console.log("viewing meedia permission");
+      console.log($('.media-permission').text())
         if ($('.media-permission').text() == 'No') {
             $('#action-needed').modal();
         }
         else {
+          console.log('Making call')
             make_call();
         }
     } else if ($('#make_call').text() == "Click to leave your conference") {
@@ -165,7 +168,7 @@ $("#call-in-form").submit(function(event)  {
         event.preventDefault();
         $('#call-in').attr("disabled", true);
         var $form = $(this);
-        $.post( "/api/v1/conference/{{response.conference_name}}/", 
+        $.post( "/api/v1/conference/{{response.conference_name}}/",
             { to: $form.find("input[id='to-number']").val()})
         .done(function(data) {
             $('#to-number').val("");
