@@ -110,11 +110,11 @@ function end_call() {
 
 function call() {
     if ($('#make_call').text() == "Click to join your conference") {
-        // if ($('.media-permission').text() == 'No') {
-        //     $('#action-needed').modal();
-        // } else {
+        if ($('.media-permission').text() == 'No') {
+            $('#action-needed').modal();
+        } else {
             make_call();
-        // }
+        }
     } else if ($('#make_call').text() == "Click to leave your conference") {
         end_call();
     }
