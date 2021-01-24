@@ -110,11 +110,11 @@ function end_call() {
 
 function call() {
     if ($('#make_call').text() == "Click to join your conference") {
-        if ($('.media-permission').text() == 'No') {
-            $('#action-needed').modal();
-        } else {
+        // if ($('.media-permission').text() == 'No') {
+        //     $('#action-needed').modal();
+        // } else {
             make_call();
-        }
+        // }
     } else if ($('#make_call').text() == "Click to leave your conference") {
         end_call();
     }
@@ -143,14 +143,14 @@ $(document).ready(function() {
     Plivo.onMediaPermission = onMediaPermission;
     config = {};
     Plivo.init(config);
-    }); 
+    });
 
 {% if outbound_pstn %}
 $("#call-in-form").submit(function(event)  {
         event.preventDefault();
         $('#call-in').attr("disabled", true);
         var $form = $(this);
-        $.post( "/api/v1/conference/{{response.conference_name}}/", 
+        $.post( "/api/v1/conference/{{response.conference_name}}/",
             { to: $form.find("input[id='to-number']").val()})
         .done(function(data) {
             $('#to-number').val("");
